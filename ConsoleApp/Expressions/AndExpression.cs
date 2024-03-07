@@ -37,7 +37,7 @@ namespace ConsoleApp.Expressions
 
             public override bool interpret(Dictionary<string, string> record)
             {
-                return Expr1.interpret(record) && Expr2.interpret(record);
+                return Expr1.interpret(record) || Expr2.interpret(record);
             }
         }
 

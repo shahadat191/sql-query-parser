@@ -70,7 +70,7 @@ namespace ConsoleApp.Tokenizer2
             for (int i = 0; i < input.Length; i++)
             {
                 var c = input[i];
-                if (char.IsWhiteSpace(c))
+                if (char.IsWhiteSpace(c) || _comparisonSymbols.Contains(c))
                 {
                     if (currentToken.Length > 0)
                     {

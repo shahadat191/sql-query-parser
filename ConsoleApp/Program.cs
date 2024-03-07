@@ -13,7 +13,7 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
             // For parsing tokens.
-            var tokens = Tokenizer.Tokenize("(T1 >= 35 AND (T1 <= 45 And T1 = 67)) OR (T3 = 'Intern' AND (T2 = 45 AND T2 = 67)) ");
+            var tokens = Tokenizer.Tokenize("(T2 = 45) and (T1 = 12 and T1 = 12) )");
 
             foreach (var token in tokens)
             {
@@ -87,8 +87,15 @@ namespace ConsoleApp
                 }
             }
 
-            bool isValid = leftValid && rightValid && (unionKeys.Count() == 1 || unionKeys.Count() == leftQueryDict.Count + rightQueryDict.Count);
-            return (isValid, queryDict);
+            bool isValidMerge = false;
+            bool isUnique = unionKeys.Count() == leftQueryDict.Count + rightQueryDict.Count;
+            if (leftQueryDict.Count == 1 || rightQueryDict.Count == 1 || isUnique)
+            {
+                isValidMerge = true;
+            }
+
+            isValidMerge = leftValid && rightValid && isValidMerge;
+            return (isValidMerge, queryDict);
         }
     }
         
