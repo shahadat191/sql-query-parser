@@ -63,7 +63,7 @@ namespace ConsoleApp.Expressions
 
             public bool interpret(Dictionary<string, string> record)
             {
-                return PredicateFactory.intercept(Predicate, record);
+                return true;
             }
         }
     }

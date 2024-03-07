@@ -100,5 +100,29 @@ namespace ConsoleApp.Tokenizer2
                 _ => 0
             };
         }
+
+        public static void PrintExpressionTree(IExpression expression, string indent = "", string nodePrefix = "")
+        {
+            // Determine the type of the expression to print the appropriate node label
+            switch (expression)
+            {
+                case AndExpression andExpr:
+                    Console.WriteLine($"{indent}{nodePrefix}AND");
+                    PrintExpressionTree(andExpr.Expr1, indent + "|   ", "├── ");
+                    PrintExpressionTree(andExpr.Expr2, indent + "|   ", "└── ");
+                    break;
+                case OrExpression orExpr:
+                    Console.WriteLine($"{indent}{nodePrefix}OR");
+                    PrintExpressionTree(orExpr.Expr1, indent + "|   ", "├── ");
+                    PrintExpressionTree(orExpr.Expr2, indent + "|   ", "└── ");
+                    break;
+                case PredicateExpression predExpr:
+                    Console.WriteLine($"{indent}{nodePrefix}{predExpr.Predicate}");
+                    break;
+                default:
+                    Console.WriteLine($"{indent}{nodePrefix}Unknown Expression Type");
+                    break;
+            }
+        }
     }
 }
